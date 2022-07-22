@@ -8,5 +8,5 @@ a litte step of my coding life
 
 ## Control
 1. Arrow keys control direction
-2. KEY_SPACK shoot bullets（max 10）
+2. KEY_SPACE shoot bullets（max 10）
 3. KEY_Q exit the game
