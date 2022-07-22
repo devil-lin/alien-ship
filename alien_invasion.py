@@ -1,4 +1,5 @@
 import imp
+from re import T
 import sys
 import pygame
 from setting import Settings
@@ -85,6 +86,9 @@ class AlienInvasion:
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
+
+        # 检查是否击中外星人
+        collsions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
 
     def _update_alien(self):
         """
