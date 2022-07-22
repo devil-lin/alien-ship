@@ -26,9 +26,12 @@ class Alien(Sprite):
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
 
+        # 存储外星人的方向
+        self.fleet_direction = randint(-1, 1)
+
     def update(self) -> None:
         """随机移动外星人"""
-        self.x += (self.settings.alien_speed * self.settings.fleet_direction)
+        self.x += (self.settings.alien_speed * self.fleet_direction)
 
         """
         x = randint(-5, 5)

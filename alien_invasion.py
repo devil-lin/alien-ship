@@ -112,40 +112,42 @@ class AlienInvasion:
         alien_width, alien_height = alien.rect.size
         
         #计算屏幕容纳的外星人
-        available_space_x = self.settings.screen_width - (2 * alien_width)
+        
+        available_space_x = self.settings.screen_width - 500 - (2 * alien_width)
         number_aliens_x = available_space_x // (1 * alien_width)
 
         ship_height = self.ship.rect.height
         available_space_y = (self.settings.screen_height - (15 * alien_height) - ship_height)
-        number_rows = available_space_y // (2 * alien_height)
-
-
-        for row_number in range(number_rows):
-            for alien_number in range(number_aliens_x):
+        number_rows = available_space_y // (3 * alien_height)
+        """
+        number_rows = 5
+        number_aliens_x = 4
+        """
+        for row_number in range(1, number_rows):
+            for alien_number in range(1, number_aliens_x):
                 if randint(0, 1):
                     self._create_alien(alien_number, row_number)
+
 
     def _create_alien(self, alien_number, row_number):
         # 创建一个外星人并且加入
         alien = Alien(self)
         alien_width, alien_height = alien.rect.size
-        alien.x = alien_width + 2 * alien_width * alien_number
+
+        alien.x =  alien_width + alien_number * 2 * alien_width
         alien.rect.x = alien.x
-        alien.rect.y = alien_height + 2 * alien_height * row_number
+
+        alien.y = row_number * alien_height 
+        alien.rect.y = alien.y
         self.aliens.add(alien)
 
     def _check_fleet_edges(self):
         """如果外星人到边缘采取措施"""
         for alien in self.aliens.sprites():
             if alien.check_edges():
-                self._change_fleet_direction()
-                break
-        
-    def _change_fleet_direction(self):
-        """将整群外星人向下移"""
-        for alien in self.aliens.sprites():
+                alien.fleet_direction *= -1
             alien.y += self.settings.fleet_drop_speed
-        self.settings.fleet_direction *= -1
+
 
 
 
